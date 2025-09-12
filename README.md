@@ -25,6 +25,8 @@ Isso significa que a decisão sobre qual banco de dados, framework web ou sistem
 ## Os Círculos e a Regra da Dependência
 A Arquitetura Limpa é frequentemente representada por um diagrama de círculos concêntricos. Cada círculo representa uma camada do software.
 
+<img width="772" height="567" alt="image" src="https://github.com/user-attachments/assets/970e3bc3-c7e9-4d9f-aa7f-366c8c70a7fb" />
+
 **A Regra da Dependência:** As dependências do código-fonte só podem apontar para dentro. Nada em um círculo interno pode saber qualquer coisa sobre algo em um círculo externo.
 
 As camadas, da mais interna para a mais externa, são:
