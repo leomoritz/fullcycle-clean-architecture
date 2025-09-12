@@ -21,8 +21,8 @@ const MockRepository = () => {
     }
 }
 
-describe("Unit test for a create customer use case", () => {
-    it("should create a customer", async () => {
+describe("Unit test for a create product use case", () => {
+    it("should create a product", async () => {
         const productRepository = MockRepository();
         const usecase = new CreateProductUseCase(productRepository);
 
