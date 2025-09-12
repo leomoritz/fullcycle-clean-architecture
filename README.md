@@ -136,3 +136,11 @@ String xmlResult = new CategoryPresenter(output).toXML();
 ```
 
 O uso de *Presenters* garante que o *Use Case* permaneça completamente ignorante sobre como os dados serão apresentados ao usuário final.
+
+## Desenvolvimento
+### Unitários
+- Caso ocorra erro de execução de todos os unitários, provavelmente é devido a versão do Node. Para resolver, basta executar o comando abaixo:
+```bash
+nvm use --lts
+```
+- Este comando faz com que o node seja atualizado para a última versão. Se realmente for problema de versão, ao executar os unitários, os mesmos devem voltar a funcionar.
