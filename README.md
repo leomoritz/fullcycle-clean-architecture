@@ -146,3 +146,13 @@ O uso de *Presenters* garante que o *Use Case* permaneça completamente ignorant
 nvm use --lts
 ```
 - Este comando faz com que o node seja atualizado para a última versão. Se realmente for problema de versão, ao executar os unitários, os mesmos devem voltar a funcionar.
+
+### Trabalhando com APIs
+- Instalando o express e o dotenv para trabalhar com endpoints
+```bash
+npm i express @types/express dotenv
+```
+- Instalando o nodemon para lidar com o server
+```bash
+npm i nodemon
+```
