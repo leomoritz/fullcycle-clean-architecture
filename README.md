@@ -156,3 +156,8 @@ npm i express @types/express dotenv
 ```bash
 npm i nodemon
 ```
+- Instalando supertest para testes E2E com express:
+```bash
+npm i -D supertest
+npm i -D @types/supertest
+```
