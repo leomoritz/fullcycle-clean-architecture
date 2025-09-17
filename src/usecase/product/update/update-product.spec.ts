@@ -1,34 +1,40 @@
 import Product from "../../../domain/product/entity/product";
 import ProductFactory from "../../../domain/product/factory/product.factory";
 import ProductRepository from "../../../infra/product/repository/sequelize/product.repository";
+import { InputUpdateProductDto } from "./update-product.dto";
 import UpdateProductUseCase from "./update-product.usecase";
 
-const product = ProductFactory.create("a", "Teclado e Mouse", 95) as Product;
-
-let input = {
-    id: "",
-    name: "",
-    price: 0,
-};
-
-beforeEach(() => {
-    input = {
-        id: product.id,
-        name: "Teclado & Mouse Logitech",
-        price: 100
-    }
-});
-
-const MockRepository = () => {
-    return {
-        findAll: jest.fn(),
-        findById: jest.fn().mockReturnValue(Promise.resolve(product)),
-        create: jest.fn(),
-        update: jest.fn(),
-    }
-}
-
 describe("Unit test for a update product use case", () => {
+    let product = {} as Product;
+    let input = {} as InputUpdateProductDto;
+    let MockRepository = () => {
+        return {
+            findAll: jest.fn(),
+            findById: jest.fn(),
+            create: jest.fn(),
+            update: jest.fn(),
+        }
+    }
+
+    beforeEach(async () => {
+        product = ProductFactory.create("a", "Teclado e Mouse", 95) as Product;
+
+        MockRepository = () => {
+            return {
+                findAll: jest.fn(),
+                findById: jest.fn().mockReturnValue(Promise.resolve(product)), // simula o retorno de findById
+                create: jest.fn(),
+                update: jest.fn(),
+            }
+        }
+
+        input = {
+            id: product.id,
+            name: "Teclado & Mouse Logitech",
+            price: 100
+        }
+    });
+
     it("should update a product", async () => {
         const productRepository: ProductRepository = MockRepository();
         const usecase = new UpdateProductUseCase(productRepository);
@@ -48,7 +54,7 @@ describe("Unit test for a update product use case", () => {
 
         input.name = "";
 
-        await expect(usecase.execute(input)).rejects.toThrow("Name is required");
+        await expect(usecase.execute(input)).rejects.toThrow("product: Name is required");
     });
 
     it("should throw an error when price is less than zero", async () => {
@@ -57,7 +63,7 @@ describe("Unit test for a update product use case", () => {
 
         input.price = -10;
 
-        await expect(usecase.execute(input)).rejects.toThrow("Price must be greater than or equal to zero");
+        await expect(usecase.execute(input)).rejects.toThrow("product: Price must be greater than or equal to zero");
     });
 
     it("should throw an error when price is zero", async () => {
@@ -66,6 +72,6 @@ describe("Unit test for a update product use case", () => {
 
         input.price = 0;
 
-        await expect(usecase.execute(input)).rejects.toThrow("Price must be greater than or equal to zero");
+        await expect(usecase.execute(input)).rejects.toThrow("product: Price must be greater than or equal to zero");
     });
 });

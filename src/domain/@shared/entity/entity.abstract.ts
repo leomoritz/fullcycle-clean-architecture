@@ -1,4 +1,5 @@
 import Notification from "../notification/notification";
+import NotificationError from "../notification/notification.error";
 
 export default abstract class Entity {
     protected _id: string;
@@ -7,5 +8,20 @@ export default abstract class Entity {
     constructor() {
         this.notification = new Notification();
     }
+
+    protected addError(errorMessage: string) {
+        this.notification.addError({
+            context: this.getClassName(),
+            message: errorMessage,
+        })
+    }
+
+    protected throwNotificationErrorIfHasErrors() {
+        if (this.notification.hasErrors()) {
+            throw new NotificationError(this.notification.getErrors());
+        }
+    }
+
+    protected abstract getClassName(): string;
 
 }

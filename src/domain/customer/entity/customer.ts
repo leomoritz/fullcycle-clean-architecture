@@ -12,6 +12,7 @@ import Address from "../value-object/address";
  * @property {string} _address - Endereço do cliente.
  */
 export default class Customer extends Entity {
+ 
   private _name: string;
   private _address!: Address;
   private _active: boolean = false;
@@ -23,13 +24,11 @@ export default class Customer extends Entity {
     this._name = name;
     this.validate();
 
-    this.addErrorsToNotificationIfExists();
+    this.throwNotificationErrorIfHasErrors();
   }
 
-  private addErrorsToNotificationIfExists() {
-    if (this.notification.hasErrors()) {
-      throw new NotificationError(this.notification.getErrors());
-    }
+   protected getClassName(): string {
+    return "customer";
   }
 
    get id(): string {
@@ -71,7 +70,7 @@ export default class Customer extends Entity {
   changeName(name: string): void {
     this._name = name;
     this.validate();
-    this.addErrorsToNotificationIfExists();
+    this.throwNotificationErrorIfHasErrors();
   }
 
   changeAddress(address: Address): void {
