@@ -167,3 +167,11 @@ npm i -D @types/supertest
 ```bash
 npm install -S yup
 ```
+
+### Trabalhando com presenters
+- Instalando lib para lidar com transformações de saída de objeto para XML
+```bash
+npm i jstoxml
+npm i -D @types/jstoxml
+```
+

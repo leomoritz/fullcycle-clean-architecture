@@ -38,7 +38,7 @@ describe("E2E test for customer", () => {
                 name: "john"
             });
 
-            expect(response.status).toBe(500);
+        expect(response.status).toBe(500);
     });
 
     it("should list all customer", async () => {
@@ -67,7 +67,7 @@ describe("E2E test for customer", () => {
             });
 
         const listResponse = await request(app).get("/customer").send();
-        
+
         expect(listResponse.status).toBe(200);
         expect(listResponse.body.customers).toHaveLength(2);
 
@@ -84,6 +84,36 @@ describe("E2E test for customer", () => {
         expect(customerTwo.address.city).toBe("City 2");
         expect(customerTwo.address.number).toBe(321);
         expect(customerTwo.address.zip).toBe("54321");
+
+        const listResponseXML = await request(app)
+            .get("/customer")
+            .set("Accept", "application/xml")
+            .send();
+
+        expect(listResponseXML.status).toBe(200);
+        expect(listResponseXML.text).toEqual(
+            `<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<customers>
+  <customer>
+    <id>${customerOne.id}</id>
+    <name>John Doe</name>
+    <address>
+      <street>Street</street>
+      <number>123</number>
+      <city>City</city>
+      <zip>12345</zip>
+    </address>
+    <id>${customerTwo.id}</id>
+    <name>Jane Doe</name>
+    <address>
+      <street>Street 2</street>
+      <number>321</number>
+      <city>City 2</city>
+      <zip>54321</zip>
+    </address>
+  </customer>
+</customers>`);
+
     });
 
 });
