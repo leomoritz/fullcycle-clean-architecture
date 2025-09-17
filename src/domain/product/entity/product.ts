@@ -1,4 +1,5 @@
 import Entity from "../../@shared/entity/entity.abstract";
+import ProductValidatorFactory from "../factory/product.validator.factory";
 import ProductInterface from "./product.interface";
 
 export default class Product extends Entity implements ProductInterface {
@@ -32,17 +33,9 @@ export default class Product extends Entity implements ProductInterface {
     }
 
     validate() {
-        if (!this._id) {
-            this.addError("Id is required");
-        }
-
-        if (!this._name) {
-            this.addError("Name is required");
-        }
-
-        if (this._price <= 0) {
-            this.addError("Price must be greater than or equal to zero");
-        }
+        ProductValidatorFactory
+        .create()
+        .validate(this);
     }
 
     changeName(name: string) {
