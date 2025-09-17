@@ -23,6 +23,10 @@ export default class Customer extends Entity {
     this._name = name;
     this.validate();
 
+    this.addErrorsToNotificationIfExists();
+  }
+
+  private addErrorsToNotificationIfExists() {
     if (this.notification.hasErrors()) {
       throw new NotificationError(this.notification.getErrors());
     }
@@ -55,6 +59,7 @@ export default class Customer extends Entity {
         message: "ID is required"
       })
     }
+    console.log(`Esse é o nome: ${this.name}`)
     if (!this._name) {
       this.notification.addError({
         context: "customer",
@@ -66,6 +71,7 @@ export default class Customer extends Entity {
   changeName(name: string): void {
     this._name = name;
     this.validate();
+    this.addErrorsToNotificationIfExists();
   }
 
   changeAddress(address: Address): void {

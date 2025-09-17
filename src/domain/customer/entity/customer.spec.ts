@@ -6,13 +6,13 @@ describe("Customer unit tests", () => {
     it("should throw error when id is empty", () => {
         expect(() => {
             new Customer("", "John Doe");
-        }).toThrow("ID is required");
+        }).toThrow("customer: ID is required");
     });
 
     it("should throw error when name is empty", () => {
         expect(() => {
             new Customer("92b9630c-368c-4221-98b7-3047872052dd", "");
-        }).toThrow("Name is required");
+        }).toThrow("customer: Name is required");
     });
 
     it("should change name", () => {
@@ -27,7 +27,7 @@ describe("Customer unit tests", () => {
         const customer = new Customer("92b9630c-368c-4221-98b7-3047872052dd", "John Doe");
         expect(() => {
             customer.changeName("");
-        }).toThrow("Name is required");
+        }).toThrow("customer: Name is required");
     });
 
     it("should change address", () => {
