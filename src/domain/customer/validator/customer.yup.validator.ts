@@ -10,7 +10,7 @@ export default class CustomerYupValidator implements ValidatorInterface<Customer
             yup.object()
                 .shape(
                     {
-                        id: yup.string().required("Id is required"),
+                        id: yup.string().required("ID is required"),
                         name: yup.string().required("Name is required"),
                     }
                 ).validateSync(
