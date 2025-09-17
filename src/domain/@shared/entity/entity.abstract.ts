@@ -9,7 +9,7 @@ export default abstract class Entity {
         this.notification = new Notification();
     }
 
-    protected addError(errorMessage: string) {
+    addError(errorMessage: string) {
         this.notification.addError({
             context: this.getClassName(),
             message: errorMessage,

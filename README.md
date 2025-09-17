@@ -161,3 +161,9 @@ npm i nodemon
 npm i -D supertest
 npm i -D @types/supertest
 ```
+
+### Trabalhando com validadores
+- Instalar lib esterna yup para auxiliar nas validações
+```bash
+npm install -S yup
+```
