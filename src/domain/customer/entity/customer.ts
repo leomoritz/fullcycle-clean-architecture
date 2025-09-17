@@ -1,3 +1,5 @@
+import Entity from "../../@shared/entity/entity.abstract";
+import NotificationError from "../../@shared/notification/notification.error";
 import Address from "../value-object/address";
 
 /**
@@ -6,26 +8,29 @@ import Address from "../value-object/address";
  * Fornece métodos para acessar e modificar essas propriedades.
  * Trata-se de uma entidade anêmica, onde a classe só carrega dados e o identificador é o único atributo que define a identidade do cliente.
  * @class Customer
- * @property {string} _id - Identificador único do cliente.
  * @property {string} _name - Nome do cliente.
  * @property {string} _address - Endereço do cliente.
  */
-export default class Customer {
-  private _id: string;
+export default class Customer extends Entity {
   private _name: string;
   private _address!: Address;
   private _active: boolean = false;
   private _rewardPoints: number = 0;
 
   constructor(id: string, name: string) {
+    super();
     this._id = id;
     this._name = name;
     this.validate();
+
+    if (this.notification.hasErrors()) {
+      throw new NotificationError(this.notification.getErrors());
+    }
   }
 
-  get id(): string {
-    return this._id;
-  }
+   get id(): string {
+        return this._id;
+    }
 
   get name(): string {
     return this._name;
@@ -45,10 +50,16 @@ export default class Customer {
 
   validate(): void {
     if (!this._id) {
-      throw new Error('ID is required');
+      this.notification.addError({
+        context: "customer",
+        message: "ID is required"
+      })
     }
     if (!this._name) {
-      throw new Error('Name is required');
+      this.notification.addError({
+        context: "customer",
+        message: "Name is required"
+      })
     }
   }
 
